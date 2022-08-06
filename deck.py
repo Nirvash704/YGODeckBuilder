@@ -1,4 +1,4 @@
-import card_class
+from card_class import *
 import pandas as pd
 from random import shuffle
 
