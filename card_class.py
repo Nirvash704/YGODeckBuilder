@@ -11,6 +11,16 @@ class Card:
     def __str__(self):
         return f'{self.name}'
 
+    '''
+    Return dictionary of class attributes
+    '''
+    def data(self):
+        attribute_dict = {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description
+        }
+        return attribute_dict
 
 class Monster(Card):
     '''
@@ -23,7 +33,7 @@ class Monster(Card):
     Synchro Tuner, XYZ, XYZ Pendulum
     '''
 
-    def __init__(self, id, name, description, level, attribute, race, type, atk_pts, def_pts, scale, linkval, linkmarkers):
+    def __init__(self, id, name, description, level, attribute, race, type, atk_pts, def_pts, scale = None, linkval = None, linkmarkers = None):
         super().__init__(id, name, description)
         self.level = level
         self.attribute = attribute
@@ -33,10 +43,30 @@ class Monster(Card):
         self.def_pts = def_pts
         self.scale = scale
         self.linkval = linkval
-        self.linkmarkers = linkmarkers
+        self.linkmarkers = linkmarkers 
 
     def __str__(self):
         return f'{self.name}, {self.level}, {self.atk_pts}, {self.def_pts} \n{self.description}'
+
+    '''
+    Return dictionary of class attributes
+    '''
+    def data(self):
+        attribute_dict = {
+            'id': self.id,
+            'name': self.name,
+            'level': self.level,
+            'atk_pts': self.atk_pts,
+            'def_pts': self.def_pts,
+            'attribute': self.attribute,
+            'race': self.race,
+            'type': self.type,
+            'scale': self.scale,
+            'linkval': self.linkval,
+            'linkmarkers': self.linkmarkers,
+            'description': self.description
+        }
+        return attribute_dict
 
 class Spell(Card):
     '''
@@ -51,6 +81,19 @@ class Spell(Card):
     def __str__(self):
         return f'{self.name}, {self.type} \n{self.description}'
 
+    '''
+    Return dictionary of class attributes
+    '''
+    def data(self):
+        attribute_dict = {
+            'id': self.id,
+            'name': self.name,
+            'type': self.type,
+            'description': self.description
+        }
+        return attribute_dict
+
+
 class Trap(Card):
     '''
     Trap subclass
@@ -64,11 +107,24 @@ class Trap(Card):
     def __str__(self):
         return f'{self.name}, {self.type} \n{self.description}'
 
+    '''
+    Return dictionary of class attributes
+    '''
+    def data(self):
+        attribute_dict = {
+            'id': self.id,
+            'name': self.name,
+            'type': self.type,
+            'description': self.description
+        }
+        return attribute_dict
+
 
 mysticmine = Spell(69, 'mystic mine', 'floodgate', 'Field')
 busterblader = Monster(332, 'buster blader', 'kills dragons', 7, 'EARTH', 'Warrior', 'Effect Monster', 2600, 2300, None, None, None)
 imperialorder = Trap(222, 'imperial order', 'stops spells', 'Countinuous')
 
-print(mysticmine)
-print(busterblader)
-print(imperialorder)
+
+# print(mysticmine.data().items())
+# print(busterblader.data().items())
+# print(imperialorder.data().items())

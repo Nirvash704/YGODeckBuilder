@@ -48,7 +48,7 @@ class Deck:
         Otherwise, return False.
         '''
         card_type = card.type
-        extra_type = {'Fusion' 'Synchro' 'XYZ' 'Link'}
+        extra_type = {'Fusion', 'Synchro', 'XYZ', 'Link'}
         if extra_type.intersection(card_type.split()) != set():
             return True
         else:
