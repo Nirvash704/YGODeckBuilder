@@ -62,14 +62,19 @@ class Deck:
         Extra Deck limit: 15 cards
         '''
         if self.card_count(card.name) >= 3:
+            print('Cannot add more than 3 copies of a card')
             return
         
         if self.is_extra(card):
             if len(self.extra) < 15:
                 self.extra.append(card)
+            else:
+                print('Cannot add more than 15 cards in Extra deck')
         else:
             if len(self.main) < 60:
                 self.main.append(card)
+            else:
+                print('Cannot add more than 60 cards in Main deck')
     
     def add_to_side(self, card):
         '''
@@ -78,10 +83,13 @@ class Deck:
         Side Deck limit: 15 cards
         '''
         if self.card_count(card.name) >= 3:
+            print('Cannot add more than 3 copies of a card')
             return
         
         if len(self.side) < 15:
             self.side.append(card)
+        else:
+            print('Cannot add more than 15 cards in Side deck')
     
     def remove(self, card_name):
         '''
@@ -165,5 +173,37 @@ class Deck:
         '''
         Export deck contents to CSV file.
         '''
-        df = pd.DataFrame(self.main + self.extra + self.side)
+
+        main_dict = []
+        extra_dict = []
+        side_dict = []
+
+        for card in self.main:
+            main_dict.append(card.data())
+
+        for card in self.extra:
+            extra_dict.append(card.data())
+
+        for card in self.side:
+            side_dict.append(card.data())
+
+
+        df = pd.DataFrame(main_dict + extra_dict + side_dict)
         df.to_csv(f'{self.deck_name}.csv', index=False)
+
+
+
+
+mysticmine = Spell(69, 'mystic mine', 'floodgate', 'Field')
+busterblader = Monster(332, 'buster blader', 'kills dragons', 7, 'EARTH', 'Warrior', 'Effect Monster', 2600, 2300, None, None, None)
+Accesscode = Monster(332, 'Accesscode', 'popoff to close game', None, 'DARK', 'Cyberse', 'Link', 2300, None, None, 4, ["Top", "Left", "Bottom", "Right"])
+imperialorder = Trap(222, 'imperial order', 'stops spells', 'Countinuous')
+
+deck1 = Deck('Buster Blader')
+
+deck1.add(mysticmine)
+deck1.add(busterblader)
+deck1.add(imperialorder)
+deck1.add(Accesscode)
+
+print(deck1.__str__())
