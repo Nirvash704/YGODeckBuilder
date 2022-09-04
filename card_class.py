@@ -1,4 +1,7 @@
 
+from asyncio import protocols
+
+
 class Card:
     '''
     Card super class
@@ -11,10 +14,20 @@ class Card:
     def __str__(self):
         return f'{self.name}'
 
-    '''
-    Return dictionary of class attributes
-    '''
+    @classmethod
+    def from_dict(cls, data):
+        '''
+        Create Card object from dictionary
+        '''
+        id = data.get('id', None)
+        name = data.get('name', None)
+        description = data.get('desc', None)
+        return cls(id, name, description)
+
     def data(self):
+        '''
+        Return dictionary of class attributes
+        '''
         attribute_dict = {
             'id': self.id,
             'name': self.name,
@@ -48,10 +61,29 @@ class Monster(Card):
     def __str__(self):
         return f'{self.name}, {self.level}, {self.atk_pts}, {self.def_pts} \n{self.description}'
 
-    '''
-    Return dictionary of class attributes
-    '''
+    @classmethod
+    def from_dict(cls, data):
+        '''
+        Create Monster Card object from dictionary
+        '''
+        id = data.get('id', None)
+        name = data.get('name', None)
+        description = data.get('desc', None)
+        level = data.get('level', None)
+        attribute = data.get('attribute', None)
+        race = data.get('race', None)
+        type = data.get('type', None)
+        atk_pts = data.get('atk', None)
+        def_pts = data.get('def', None)
+        scale = data.get('scale', None)
+        linkval = data.get('linkval', None)
+        linkmarkers = data.get('linkmarkers', None)
+        return cls(id, name, description, level, attribute, race, type, atk_pts, def_pts, scale, linkval, linkmarkers)
+    
     def data(self):
+        '''
+        Return dictionary of class attributes
+        '''
         attribute_dict = {
             'id': self.id,
             'name': self.name,
@@ -81,10 +113,21 @@ class Spell(Card):
     def __str__(self):
         return f'{self.name}, {self.type} \n{self.description}'
 
-    '''
-    Return dictionary of class attributes
-    '''
+    @classmethod
+    def from_dict(cls, data):
+        '''
+        Create Spell Card object from dictionary
+        '''
+        id = data.get('id', None)
+        name = data.get('name', None)
+        description = data.get('desc', None)
+        type = data.get('type', None)
+        return cls(id, name, description, type)
+    
     def data(self):
+        '''
+        Return dictionary of class attributes
+        '''
         attribute_dict = {
             'id': self.id,
             'name': self.name,
@@ -107,10 +150,21 @@ class Trap(Card):
     def __str__(self):
         return f'{self.name}, {self.type} \n{self.description}'
 
-    '''
-    Return dictionary of class attributes
-    '''
+    @classmethod
+    def from_dict(cls, data):
+        '''
+        Create Trap Card object from dictionary
+        '''
+        id = data.get('id', None)
+        name = data.get('name', None)
+        description = data.get('desc', None)
+        type = data.get('type', None)
+        return cls(id, name, description, type)
+    
     def data(self):
+        '''
+        Return dictionary of class attributes
+        '''
         attribute_dict = {
             'id': self.id,
             'name': self.name,
@@ -120,10 +174,46 @@ class Trap(Card):
         return attribute_dict
 
 
-mysticmine = Spell(69, 'mystic mine', 'floodgate', 'Field')
-busterblader = Monster(332, 'buster blader', 'kills dragons', 7, 'EARTH', 'Warrior', 'Effect Monster', 2600, 2300, None, None, None)
-imperialorder = Trap(222, 'imperial order', 'stops spells', 'Countinuous')
+# mysticmine = Spell(69, 'mystic mine', 'floodgate', 'Field')
+# busterblader = Monster(332, 'buster blader', 'kills dragons', 7, 'EARTH', 'Warrior', 'Effect Monster', 2600, 2300, None, None, None)
+# imperialorder = Trap(222, 'imperial order', 'stops spells', 'Countinuous')
 
+# dark_magician = {
+#     'id': 12341,
+#     'name': 'Dark Magician',
+#     'desc': 'This is a strong monster!',
+#     'level': 7,
+#     'attribute': 'DARK',
+#     'race': 'Spellcaster',
+#     'type': 'Effect Monster',
+#     'atk': 2500,
+#     'def': 2100
+# }
+
+# card1 = Spell.from_dict(dark_magician)
+
+# raigeki = {
+#     'id': 31231,
+#     'name': 'Raigeki',
+#     'desc': 'Destroy all of your opponent\' monsters',
+#     'type': 'Spell Card'
+# }
+
+
+# protocol = {
+#     'id': 4242121,
+#     'name': 'Altergeist Protocol',
+#     'desc': 'Does Altergeist stuff!',
+#     'type': 'Trap Card'
+# }
+
+# card1 = Monster.from_dict(dark_magician)
+# card2 = Spell.from_dict(raigeki)
+# card3 = Trap.from_dict(protocol)
+
+# print(card1.data())
+# print(card2.data())
+# print(card3.data())
 
 # print(mysticmine.data().items())
 # print(busterblader.data().items())
