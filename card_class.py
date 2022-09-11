@@ -1,7 +1,3 @@
-
-from asyncio import protocols
-
-
 class Card:
     '''
     Card super class
